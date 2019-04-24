@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>News Scraper</title>
+
+    <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+    <div class="jumbotron">
+        <h1>
+            Buzzfeed News Scraper
+        </h1>
+    </div>
+    <div class="wrapper">
+        <div class="row">
+            <div class="col-sm-12">
+                <button type="button" class="btn btn-success" id="saved-art-btn">Saved Articles</button>
+                <button type="button" class="btn btn-success" id="scrape-art-btn">Scrape News</button>
+            </div>
+        </div>
+        <div class="row" id="saved-articles">
+            <div class="col-sm-12">
+                <h1>SAVED ARTICLES</h1>
+                <!-- use handlebars to render articles with a unique button to accept comments -->
+            </div>
+        </div>
+        <div class="row" id="all-articles">
+            <div class="col-sm-12">
+                <h1>ALL ARTICLES</h1>
+                <!-- use handlebars to show all articles-->
+            </div>
+        </div>
+    </div>
+</body>
+
+<!-- <script type="text/javascipt" src="/assets/js/logic.js"></script> -->
+
+</html>
+
+
+<script>
+    $(document).ready(function () {
+        $("#saved-articles").hide();
+
+        $("#saved-art-btn").on("click", function (event) {
+            event.preventDefault();
+            $("#saved-articles").show();
+            $("#all-articles").hide();
+            // console.log("clicked");
+        });
+
+        $("#scrape-art-btn").on("click", function(event){
+            event.preventDefault();
+            $("#saved-articles").hide();
+            $("#all-articles").show();
+            // console.log("clicked");
+        })
+
+
+
+
+
+
+
+
+
+
+
+
+
+    });
+</script>
