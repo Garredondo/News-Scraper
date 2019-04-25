@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,52 +8,72 @@
     <title>News Scraper</title>
 
     <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/assets/css/style.css">
 
 </head>
+
 <body>
     {{{body}}}
 </body>
+
 </html>
 
 <script>
-     $("#saved-articles").hide();
+    $("#saved-articles").hide();
 
-    // $.getJSON("/articles", function(data){
-    //     // render articles using handlbars
-    // })
+//button to get to all articles
+    $("#all-art-btn").on("click", function (event) {
+        event.preventDefault();
+        $("#saved-articles").hide();
+        $("#all-articles").show();
+        $.ajax("/", {
+            type: "GET"
+        }).then(function () {
+            console.log("All articles.");
+        });
+    });
 
+// button to get to saved articles
     $("#saved-art-btn").on("click", function (event) {
         event.preventDefault();
         $("#saved-articles").show();
         $("#all-articles").hide();
-        
-
     });
 
-    $("#scrape-art-btn").on("click", function(event){
+// button to scrape NPR site
+    $("#scrape-art-btn").on("click", function (event) {
         event.preventDefault();
         $("#saved-articles").hide();
         $("#all-articles").show();
 
-    })
+        $.ajax("/scrape", {
+            type: "GET"
+        }).then(function () {
+            console.log("Scrape complete.");
+            location.reload();
+        });
+    });
 
-    $(".saveArticle").on("click", function(event){
+// button to save the articles
+    $(".saveArticle").on("click", function (event) {
         event.preventDefault();
-        
+
         var id = $(this).data("id");
         console.log(id);
 
         $.ajax("/save/" + id, {
             type: "PUT",
             data: id
-        }).then(function(){
+        }).then(function () {
             console.log("Saved article.");
-            location.reload();
         })
     });
 </script>
-

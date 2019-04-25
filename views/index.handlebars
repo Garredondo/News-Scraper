@@ -7,14 +7,24 @@
     <div class="row">
         <div class="col-sm-12">
             <div id="button-holder">
+                <button type="button" class="btn btn-success" id="all-art-btn">All Articles</button>
                 <button type="button" class="btn btn-success" id="saved-art-btn">Saved Articles</button>
-                <button type="button" class="btn btn-success" id="scrape-art-btn">Scrape News</button>
+                <button type="button" class="btn btn-danger" id="scrape-art-btn">Scrape</button>
             </div>
         </div>
     </div>
     <div class="row" id="saved-articles">
         <div class="col-sm-12">
-            <h1>SAVED ARTICLES</h1>
+            <h1>Saved Articles</h1><br>
+            {{#each articles}}
+                {{#if this.saved}}
+                    <h4>{{this.title}}</h4>
+                    <p>{{this.description}}</p>
+                    <textarea></textarea><br>
+                    <button data-id="{{this.id}}" class="saveComment">Save Comment</button><br><br>
+                {{/if}}
+            {{/each}}
+
             <!-- use handlebars to render articles with a unique button to accept comments -->
         </div>
     </div>

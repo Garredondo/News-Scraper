@@ -84,36 +84,42 @@ app.get("/", function (req, res) {
     });
 });
 
-// save article
+// save article ========= ASK JAMES ABOUT THIS!!!!!
 app.put("/save/:id", function(req, res){
     var id = req.params.id;
     console.log(id);
-    db.Article.update({"_id" : id}, {$set : {"saved" : true}});
+    db.Article.findOneAndUpdate({"_id" : id}, {$set : {"saved" : true}})
+        .then(function(data){
+            console.log(data);
+        }).catch(function(err){
+            console.log(err);
+        });
+    res.send("Saved");
 });
 
 
+// NEED TO WORK ON THE FOLLOWING>>>>
 
+// app.get("/articles/:id", function (req, res) {
+//     db.Article.findOne({ _id: req.params.id }).populate("note").then(function (dbArticle) {
+//         var articleObj = {
+//             articles: dbArticle
+//         };
+//         res.render("index", articleObj);
+//     }).catch(function (err) {
+//         res.json(err);
+//     });
+// });
 
-app.get("/articles/:id", function (req, res) {
-    db.Article.findOne({ _id: req.params.id }).populate("note").then(function (dbArticle) {
-        var articleObj = {
-            articles: dbArticle
-        };
-        res.render("index", articleObj);
-    }).catch(function (err) {
-        res.json(err);
-    });
-});
-
-app.post("/articles/:id", function (req, res) {
-    db.Note.create(req.body).then(function (dbNote) {
-        return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
-    }).then(function (dbArticle) {
-        res.json(dbArticle);
-    }).catch(function (err) {
-        res.json(err);
-    });
-});
+// app.post("/articles/:id", function (req, res) {
+//     db.Note.create(req.body).then(function (dbNote) {
+//         return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+//     }).then(function (dbArticle) {
+//         res.json(dbArticle);
+//     }).catch(function (err) {
+//         res.json(err);
+//     });
+// });
 
 app.delete("/articles/:id", function (req, res) {
     db.Note.remove(req.body).then(function (dbNote) {

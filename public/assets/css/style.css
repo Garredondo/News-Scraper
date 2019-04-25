@@ -1,3 +1,7 @@
+.wrapper {
+    width: 900px;
+}
+
 #showing-articles {
     width: 900px;
     text-align: justify;
@@ -7,12 +11,12 @@
     padding: 20px;
 }
 
-
-#saved-art-btn,
-#scrape-art-btn {
+#all-art-btn,
+#saved-art-btn {
     background-color: #227bbd;
 }
 
+.saveComment,
 .saveArticle {
     color: white;
     background-color: #d62021;
