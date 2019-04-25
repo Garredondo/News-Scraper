@@ -1,0 +1,36 @@
+<div class="jumbotron">
+    <h1>
+        NPR Scraper
+    </h1>
+</div>
+<div class="wrapper">
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="button-holder">
+                <button type="button" class="btn btn-success" id="saved-art-btn">Saved Articles</button>
+                <button type="button" class="btn btn-success" id="scrape-art-btn">Scrape News</button>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="saved-articles">
+        <div class="col-sm-12">
+            <h1>SAVED ARTICLES</h1>
+            <!-- use handlebars to render articles with a unique button to accept comments -->
+        </div>
+    </div>
+    <div class="row" id="all-articles">
+        <div class="col-sm-12">
+            <h1>The News</h1><br>
+            <div id="showing-articles">
+                {{#each articles}}
+                <h4>{{this.title}}</h4>
+                <p>{{this.description}}</p>
+                <a href="{{this.url}}" target="_blank">{{this.url}}</a><br>
+                <button data-id="{{this.id}}" class="saveArticle">Save Article</button><br><br>
+                {{/each}}
+            </div>
+
+            <!-- use handlebars to show all articles-->
+        </div>
+    </div>
+</div>

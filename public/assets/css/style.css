@@ -1,0 +1,21 @@
+#showing-articles {
+    width: 900px;
+    text-align: justify;
+}
+
+#button-holder {
+    padding: 20px;
+}
+
+
+#saved-art-btn,
+#scrape-art-btn {
+    background-color: #227bbd;
+}
+
+.saveArticle {
+    color: white;
+    background-color: #d62021;
+    border-radius: 25px;
+}
+

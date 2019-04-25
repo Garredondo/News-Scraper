@@ -7,7 +7,7 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 
 // require all models
-// var db = require("./models");
+var db = require("./models");
 
 const PORT = 3000;
 
@@ -15,28 +15,117 @@ const PORT = 3000;
 const app = express();
 
 // config middleware
-    // morgan logger for logging requests
+// morgan logger for logging requests
 app.use(logger("dev"));
-    // middleware to parse request body as JSON
-app.use(express.urlencoded({ extended: true}));
+// middleware to parse request body as JSON
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-    // set public as a static folder
+// set public as a static folder
 app.use(express.static("public"));
+
+// connect to Mongo DB
+
+mongoose.connect("mongodb://localhost/nprscraper", { useNewUrlParser: true });
 
 // handlebars
 const exphbs = require("express-handlebars");
 
-app.engine("handlebars", exphbs({ defaultLayout : "main" }));
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
-
-// connect to Mongo DB
-
-mongoose.connect("mongodb://localhost/_dbNAME", { useNewUrlParser : true});
 
 // routes
 
+// scrape for articles
+app.get("/scrape", function (req, res) {
+    axios.get("http://www.npr.org/sections/news/archive").then(function (response) {
+        // needed for cheerio
+        var $ = cheerio.load(response.data);
+
+        $("div.item-info").each(function (i, element) {
+
+            var result = {};
+
+            result.title = $(this)
+                .children("h2.title")
+                .find("a")
+                .text();
+            result.description = $(this)
+                .children("p.teaser")
+                .find("a")
+                .text();
+            result.url = $(this)
+                .children("p.teaser")
+                .children("a")
+                .attr("href");
+
+            db.Article.create(result)
+                .then(function (dbArticle) {
+                    console.log(dbArticle);
+                }).catch(function (err) {
+                    console.log(err);
+                });
+
+        });
+        res.send("Scrape Complete");
+    });
+});
+
+// display all the articles
+app.get("/", function (req, res) {
+    db.Article.find({}).then(function (dbArticle) {
+        
+        var articleObj = {
+            articles: dbArticle
+        };
+        res.render("index", articleObj);
+        
+    }).catch(function (err) {
+        res.json(err);
+    });
+});
+
+// save article
+app.put("/save/:id", function(req, res){
+    var id = req.params.id;
+    console.log(id);
+    db.Article.update({"_id" : id}, {$set : {"saved" : true}});
+});
+
+
+
+
+app.get("/articles/:id", function (req, res) {
+    db.Article.findOne({ _id: req.params.id }).populate("note").then(function (dbArticle) {
+        var articleObj = {
+            articles: dbArticle
+        };
+        res.render("index", articleObj);
+    }).catch(function (err) {
+        res.json(err);
+    });
+});
+
+app.post("/articles/:id", function (req, res) {
+    db.Note.create(req.body).then(function (dbNote) {
+        return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+    }).then(function (dbArticle) {
+        res.json(dbArticle);
+    }).catch(function (err) {
+        res.json(err);
+    });
+});
+
+app.delete("/articles/:id", function (req, res) {
+    db.Note.remove(req.body).then(function (dbNote) {
+        return db.dbArticle.findOneAndRemove({ _id: req.params.id });
+    }).then(function (dbArticle) {
+        res.json(dbArticle);
+    }).catch(function (err) {
+        res.json(err);
+    });
+});
 
 // start the server
-app.listen(PORT, function(){
+app.listen(PORT, function () {
     console.log("App running on port " + PORT + "!")
-})
+});
