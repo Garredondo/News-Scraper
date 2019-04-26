@@ -14,17 +14,17 @@ Vist the site here: https://ga-news-scraper.herokuapp.com/
 
 ### Full Site
 
-![News-Scraper](/assets/images/app-img.png)
+![News-Scraper](./assets/images/app-img.png)
 Format: ![Alt Text](url)
 
 ### Recent Stories
 
-![News-Scraper](/assets/images/recent-art.png)
+![News-Scraper](./assets/images/recent-art.png)
 Format: ![Alt Text](url)
 
 ### Saved Articles
 
-![News-Scraper](/assets/images/saved-art.png)
+![News-Scraper](./assets/images/saved-art.png)
 Format: ![Alt Text](url)
 
 ### Contact Information
