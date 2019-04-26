@@ -9,7 +9,7 @@ const cheerio = require("cheerio");
 // require all models
 var db = require("./models");
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // initialize Express
 const app = express();
@@ -26,7 +26,7 @@ app.use(express.static("public"));
 // connect to Mongo DB
 
 // this is is the code from the instructions updated with my database?
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/nprscraper";
+var MONGODB_URI = process.env.MONGODB_URI || ("mongodb://localhost/nprscraper", {useNewUrlParser: true});
 
 mongoose.connect(MONGODB_URI);
 
