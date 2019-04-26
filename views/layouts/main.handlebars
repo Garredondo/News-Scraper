@@ -94,7 +94,21 @@
             location.reload();
         });
 
+        $(this).siblings(".user-comment").val(""); 
     });
 
 // button to delete comment
+
+    $(".delete-comment").on("click", function(event){
+        event.preventDefault();
+
+        var id = $(this).data("id");
+        
+        $.ajax("/articles/" + id, {
+            type: "DELETE",
+            data: id
+        }).then(function(data){
+            location.reload();
+        });
+    });
 </script>

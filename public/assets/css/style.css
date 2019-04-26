@@ -23,10 +23,11 @@
     background-color: #227bbd;
 }
 
+.delete-comment,
 .add-comment,
 .saveArticle {
     color: white;
     background-color: #d62021;
-    border-radius: 25px;
+    border-radius: 14px;
 }
 

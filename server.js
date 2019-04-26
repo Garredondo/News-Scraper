@@ -81,9 +81,9 @@ app.get("/", function (req, res) {
     db.Article.find({}).populate("note").then(function (dbArticle) {
         
         var articleObj = {
-            articles: dbArticle
+            articles: dbArticle 
         };
-        console.log(articleObj);
+        
         res.render("index", articleObj);
         
     }).catch(function (err) {
@@ -104,26 +104,15 @@ app.put("/save/:id", function(req, res){
     res.send("Saved");
 });
 
-
-// NEED TO WORK ON THE FOLLOWING>>>>
-
-// app.get("/articles/:id", function (req, res) {
-//     db.Article.findOne({ _id: req.params.id }).populate("note").then(function (dbArticle) {
-//         var articleObj = {
-//             articles: dbArticle
-//         };
-//         res.render("index", articleObj);
-//     }).catch(function (err) {
-//         res.json(err);
-//     });
-// });
-
+// post a comment to saved article
 app.post("/articles/:id", function (req, res) {
-    console.log(req.body);
+    
     db.Note.create(req.body).then(function (dbNote) {
         return db.Article.findOneAndUpdate({ _id: req.params.id }, { $push : {note: dbNote._id }}, { new: true });
+
     }).then(function (dbArticle) {
         res.status(200)
+        console.log(dbArticle);
     }).catch(function (err) {
         res.json(err);
     });
