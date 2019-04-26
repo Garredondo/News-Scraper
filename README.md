@@ -14,16 +14,17 @@ Vist the site here: https://ga-news-scraper.herokuapp.com/
 
 ### Full Site
 
-![News-Scraper](/assets/images/app-img.png)
+![News-Scraper](/public/assets/images/app-img.png)
 
 ### Recent Stories
 
-![News-Scraper](/assets/images/recent-art.png)
+![News-Scraper](/public/assets/images/recent-art.png)
 
 ### Saved Articles
 
-![News-Scraper](/assets/images/saved-art.png)
+![News-Scraper](/public/assets/images/saved-art.png)
 
 ### Contact Information
 
 This project is maintained by George Arredondo
+
