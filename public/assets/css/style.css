@@ -5,32 +5,47 @@
     font-weight: bolder;
 }
 
-.container {
-    width: 950px;
-}
-
-#showing-articles {
-    width: 900px;
-    text-align: justify;
-}
-
 #button-holder {
     padding: 20px;
 }
 
-#all-art-btn,
-#saved-art-btn {
+#scrape-art-btn {
     background-color: #227bbd;
+    color: white;   
 }
 
 .delete-comment,
 .add-comment,
 .saveArticle {
     color: white;
-    background-color: #d62021
+    background-color: #d62021;
+    margin-top: 10px;
 }
 
 .delete-comment {
     border-radius: 10px;
 }
 
+.link {
+    font-weight: bold;
+    color: #227bbd;
+}
+
+.ind-art,
+.sav-art {
+    border: solid;
+    border-width: thin;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #EBF4F4;
+}
+
+h1 {
+    text-align: center;
+}
+
+#headline {
+    font-weight: bold;
+    font-size: 60px;
+}
