@@ -25,16 +25,13 @@ app.use(express.static("public"));
 
 // connect to Mongo DB
 
-// this is is the code from the instructions updated with my database?
-var MONGODB_URI = process.env.MONGODB_URI || ("mongodb://localhost/nprscraper", {useNewUrlParser: true});
+// ********coded for deployment....
+// var MONGODB_URI = process.env.MONGODB_URI || ("mongodb://localhost/nprscraper", {useNewUrlParser: true});
 
-mongoose.connect(MONGODB_URI);
+// mongoose.connect(MONGODB_URI);
 
-// this is my original connection... 
-// mongoose.connect("mongodb://localhost/nprscraper", { useNewUrlParser: true });
-
-// this is directly from the hw instructions
-// var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+// *****remove this when you deploy!!!!
+mongoose.connect("mongodb://localhost/nprscraper", { useNewUrlParser: true });
 
 // handlebars
 const exphbs = require("express-handlebars");
@@ -81,11 +78,12 @@ app.get("/scrape", function (req, res) {
 
 // display all the articles
 app.get("/", function (req, res) {
-    db.Article.find({}).then(function (dbArticle) {
+    db.Article.find({}).populate("note").then(function (dbArticle) {
         
         var articleObj = {
             articles: dbArticle
         };
+        console.log(articleObj);
         res.render("index", articleObj);
         
     }).catch(function (err) {
@@ -123,9 +121,9 @@ app.put("/save/:id", function(req, res){
 app.post("/articles/:id", function (req, res) {
     console.log(req.body);
     db.Note.create(req.body).then(function (dbNote) {
-        return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+        return db.Article.findOneAndUpdate({ _id: req.params.id }, { $push : {note: dbNote._id }}, { new: true });
     }).then(function (dbArticle) {
-        res.render(dbArticle);
+        res.status(200)
     }).catch(function (err) {
         res.json(err);
     });
