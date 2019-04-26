@@ -23,7 +23,7 @@
                         <p>{{this.description}}</p>
                         <h5>Comments:</h5>
                         {{#each this.note}}
-                            <p>{{this.body}} <button data-id="{{this.id}}" class="delete-comment">Delete</button></p><br>
+                            <p>{{this.body}} <button data-id="{{this.id}}" class="delete-comment"><i class="fas fa-trash-alt"></i></button></p><br>
                         {{/each}}
                         <textarea data-id="{{this.id}}" class="user-comment" placeholder="Add a Comment"
                             type="text"></textarea><br>

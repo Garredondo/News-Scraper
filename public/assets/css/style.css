@@ -27,7 +27,10 @@
 .add-comment,
 .saveArticle {
     color: white;
-    background-color: #d62021;
-    border-radius: 14px;
+    background-color: #d62021
+}
+
+.delete-comment {
+    border-radius: 10px;
 }
 

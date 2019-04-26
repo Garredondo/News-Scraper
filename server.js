@@ -110,23 +110,19 @@ app.post("/articles/:id", function (req, res) {
     db.Note.create(req.body).then(function (dbNote) {
         return db.Article.findOneAndUpdate({ _id: req.params.id }, { $push : {note: dbNote._id }}, { new: true });
 
-    }).then(function (dbArticle) {
+    }).then(function (data) {
         res.status(200)
-        console.log(dbArticle);
+        console.log(data)
     }).catch(function (err) {
         res.json(err);
     });
 });
 
-// app.delete("/articles/:id", function (req, res) {
-//     db.Note.remove(req.body).then(function (dbNote) {
-//         return db.dbArticle.findOneAndRemove({ _id: req.params.id });
-//     }).then(function (dbArticle) {
-//         res.json(dbArticle);
-//     }).catch(function (err) {
-//         res.json(err);
-//     });
-// });
+app.delete("/comments/:id", function (req, res) {
+    db.Note.findOneAndRemove({_id: req.params.id}, function(err){
+        res.json(err);
+    });
+});
 
 // start the server
 app.listen(PORT, function () {
