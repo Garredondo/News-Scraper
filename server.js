@@ -25,11 +25,12 @@ app.use(express.static("public"));
 
 // connect to Mongo DB
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/nprscraper";
 
 mongoose.connect(MONGODB_URI);
 
 // mongoose.connect("mongodb://localhost/nprscraper", { useNewUrlParser: true });
+// var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
 // handlebars
 const exphbs = require("express-handlebars");
