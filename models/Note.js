@@ -3,9 +3,7 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var NoteSchema = new Schema({
-    body: {
-        type: String
-    }
+    body: String
 });
 
 // create model using schema above

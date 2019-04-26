@@ -76,4 +76,23 @@
             console.log("Saved article.");
         })
     });
+
+// button to add comment
+    $(".add-comment").on("click", function(event){
+        event.preventDefault();
+        var id = $(this).data("id");
+        var comment = $(".user-comment").val().trim(); 
+
+        console.log(comment);
+        $.ajax("/articles/" + id, {
+            type: "POST",
+            data: {
+                body: comment
+            }
+        }).then(function(data){
+            console.log(data);
+        });
+    });
+
+// button to delete comment
 </script>

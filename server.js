@@ -84,7 +84,7 @@ app.get("/", function (req, res) {
     });
 });
 
-// save article ========= ASK JAMES ABOUT THIS!!!!!
+// save article 
 app.put("/save/:id", function(req, res){
     var id = req.params.id;
     console.log(id);
@@ -111,25 +111,26 @@ app.put("/save/:id", function(req, res){
 //     });
 // });
 
-// app.post("/articles/:id", function (req, res) {
-//     db.Note.create(req.body).then(function (dbNote) {
-//         return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+app.post("/articles/:id", function (req, res) {
+    console.log(req.body);
+    db.Note.create(req.body).then(function (dbNote) {
+        return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+    }).then(function (dbArticle) {
+        res.render(dbArticle);
+    }).catch(function (err) {
+        res.json(err);
+    });
+});
+
+// app.delete("/articles/:id", function (req, res) {
+//     db.Note.remove(req.body).then(function (dbNote) {
+//         return db.dbArticle.findOneAndRemove({ _id: req.params.id });
 //     }).then(function (dbArticle) {
 //         res.json(dbArticle);
 //     }).catch(function (err) {
 //         res.json(err);
 //     });
 // });
-
-app.delete("/articles/:id", function (req, res) {
-    db.Note.remove(req.body).then(function (dbNote) {
-        return db.dbArticle.findOneAndRemove({ _id: req.params.id });
-    }).then(function (dbArticle) {
-        res.json(dbArticle);
-    }).catch(function (err) {
-        res.json(err);
-    });
-});
 
 // start the server
 app.listen(PORT, function () {
