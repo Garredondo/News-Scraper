@@ -29,32 +29,21 @@
 </html>
 
 <script>
-    $("#saved-articles").hide();
 
 //button to get to all articles
-    $("#all-art-btn").on("click", function (event) {
+    {{!-- $("#all-art-btn").on("click", function (event) {
         event.preventDefault();
-        $("#saved-articles").hide();
-        $("#all-articles").show();
+        
         $.ajax("/", {
             type: "GET"
         }).then(function () {
             console.log("All articles.");
         });
-    });
-
-// button to get to saved articles
-    $("#saved-art-btn").on("click", function (event) {
-        event.preventDefault();
-        $("#saved-articles").show();
-        $("#all-articles").hide();
-    });
+    }); --}}
 
 // button to scrape NPR site
     $("#scrape-art-btn").on("click", function (event) {
         event.preventDefault();
-        $("#saved-articles").hide();
-        $("#all-articles").show();
 
         $.ajax("/scrape", {
             type: "GET"
@@ -69,7 +58,6 @@
         event.preventDefault();
 
         var id = $(this).data("id");
-        console.log(id);
 
         $.ajax("/save/" + id, {
             type: "PUT",
@@ -93,7 +81,8 @@
                 body: comment
             }
         }).then(function(data){
-            {{!-- location.reload(); --}}
+            console.log("Added comment.");
+            location.reload();
         });
 
         location.reload();
@@ -101,7 +90,6 @@
     });
 
 // button to delete comment
-
     $(".delete-comment").on("click", function(event){
         event.preventDefault();
 
@@ -114,4 +102,5 @@
             location.reload();
         });
     });
+
 </script>

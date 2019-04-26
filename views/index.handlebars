@@ -5,45 +5,46 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-12">
+        <div class="col-sm-12">
             <div id="button-holder">
-                <button type="button" class="btn btn-success" id="all-art-btn">All Articles</button>
-                <button type="button" class="btn btn-success" id="saved-art-btn">Saved Articles</button>
-                <button type="button" class="btn btn-danger" id="scrape-art-btn">Scrape</button>
+                <button type="button" class="btn" id="scrape-art-btn">Scrape NPR</button>
             </div>
         </div>
     </div>
-    <div class="row" id="saved-articles">
-        <div class="col-12">
-            <h1>Saved Articles</h1><br>
-            {{#each articles}}
-                {{#if this.saved}}
-                    <div>
-                        <h4>{{this.title}}</h4>
-                        <p>{{this.description}}</p>
-                        <h5>Comments:</h5>
-                        {{#each this.note}}
-                            <p>{{this.body}} <button data-id="{{this.id}}" class="delete-comment"><i class="fas fa-trash-alt"></i></button></p><br>
-                        {{/each}}
-                        <textarea data-id="{{this.id}}" class="user-comment" placeholder="Add a Comment"
-                            type="text"></textarea><br>
-                        <button data-id="{{this.id}}" class="add-comment">Submit</button><br><br>
-                    </div>
-                {{/if}}
-            {{/each}}
-        </div>
-    </div>
-    <div class="row" id="all-articles">
-        <div class="col-12">
-            <h1>The News</h1><br>
+    <div class="row">
+        <div class="col-sm-7">
+            <h1>Recent Stories</h1><br>
             <div id="showing-articles">
                 {{#each articles}}
-                <h4>{{this.title}}</h4>
-                <p>{{this.description}}</p>
-                <a href="{{this.url}}" target="_blank">{{this.url}}</a><br>
-                <button data-id="{{this.id}}" class="saveArticle">Save Article</button><br><br>
+                <div class="ind-art">
+                    <h4>{{this.title}}</h4>
+                    <p>{{this.description}}</p>
+                    <a href="{{this.url}}" target="_blank" class="link">Visit Source</a><br>
+                    <button data-id="{{this.id}}" class="saveArticle">Save Article</button><br><br>
+                </div>
                 {{/each}}
             </div>
         </div>
+
+        <div class="col-sm-5">
+            <h1>Saved Articles</h1><br>
+            {{#each articles}}
+            {{#if this.saved}}
+            <div class="sav-art">
+                <h4>{{this.title}}</h4>
+                <p>{{this.description}}</p>
+                <h5>Comments:</h5>
+                {{#each this.note}}
+                <p>{{this.body}} <button data-id="{{this.id}}" class="delete-comment"><i
+                            class="fas fa-trash-alt"></i></button></p><br>
+                {{/each}}
+                <textarea data-id="{{this.id}}" class="user-comment" placeholder="Add a Comment"
+                    type="text"></textarea><br>
+                <button data-id="{{this.id}}" class="add-comment">Submit</button><br><br>
+            </div>
+            {{/if}}
+            {{/each}}
+        </div>
     </div>
 </div>
+

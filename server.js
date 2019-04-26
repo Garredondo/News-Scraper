@@ -26,12 +26,9 @@ app.use(express.static("public"));
 // connect to Mongo DB
 
 // ********coded for deployment....
-// var MONGODB_URI = process.env.MONGODB_URI || ("mongodb://localhost/nprscraper", {useNewUrlParser: true});
+var MONGODB_URI = process.env.MONGODB_URI || ("mongodb://localhost/nprscraper", {useNewUrlParser: true});
 
-// mongoose.connect(MONGODB_URI);
-
-// *****remove this when you deploy!!!!
-mongoose.connect("mongodb://localhost/nprscraper", { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI);
 
 // handlebars
 const exphbs = require("express-handlebars");
