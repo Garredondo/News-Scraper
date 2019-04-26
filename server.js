@@ -25,10 +25,12 @@ app.use(express.static("public"));
 
 // connect to Mongo DB
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/nprscraper";
+// this is is the code from the instructions updated with my database?
+var MONGODB_URI = process.env.MONGODB_URI || ("mongodb://localhost/nprscraper", { useNewUrlParser: true });
 
 mongoose.connect(MONGODB_URI);
 
+// this is my original connection... 
 // mongoose.connect("mongodb://localhost/nprscraper", { useNewUrlParser: true });
 // var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
